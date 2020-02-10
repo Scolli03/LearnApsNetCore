@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System;
 
 namespace LearnAspNetCore
 {
@@ -28,38 +28,22 @@ namespace LearnAspNetCore
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                DeveloperExceptionPageOptions developerExceptionPageOptions = new DeveloperExceptionPageOptions()
+                {
+                    SourceCodeLineCount = 10
+                };
+                app.UseDeveloperExceptionPage(developerExceptionPageOptions);
             }
 
-            //DefaultFilesOptions defaultFilesOptions = new DefaultFilesOptions();
-            //defaultFilesOptions.DefaultFileNames.Clear();
-            //defaultFilesOptions.DefaultFileNames.Add("foo.html");
-            //app.UseDefaultFiles(defaultFilesOptions);
-
-            //app.UseStaticFiles();
-
-
-            FileServerOptions defaultFilesOptions = new FileServerOptions();
-            defaultFilesOptions.DefaultFilesOptions.DefaultFileNames.Clear();
-            defaultFilesOptions.DefaultFilesOptions.DefaultFileNames.Add("foo.html");
-
             app.UseFileServer();
-            
 
             app.Run(async (context) =>
             {
+                throw new Exception("Something is messed up yo");
                 await context.Response.WriteAsync("Hello World");
             });
 
-            //app.UseRouting();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapGet("/", async context =>
-            //    {
-            //        await context.Response.WriteAsync(_config["MyKey"]);
-            //    });
-            //});
+           
         }
     }
 }

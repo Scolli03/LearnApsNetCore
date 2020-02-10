@@ -36,6 +36,8 @@ namespace LearnAspNetCore
             //defaultFilesOptions.DefaultFileNames.Add("foo.html");
             //app.UseDefaultFiles(defaultFilesOptions);
 
+            //app.UseStaticFiles();
+
 
             FileServerOptions defaultFilesOptions = new FileServerOptions();
             defaultFilesOptions.DefaultFilesOptions.DefaultFileNames.Clear();

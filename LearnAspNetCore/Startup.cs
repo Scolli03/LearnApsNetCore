@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 
 namespace LearnAspNetCore
 {
@@ -28,22 +27,19 @@ namespace LearnAspNetCore
         {
             if (env.IsDevelopment())
             {
-                DeveloperExceptionPageOptions developerExceptionPageOptions = new DeveloperExceptionPageOptions()
-                {
-                    SourceCodeLineCount = 10
-                };
-                app.UseDeveloperExceptionPage(developerExceptionPageOptions);
+                app.UseDeveloperExceptionPage();
             }
+            //else if (env.IsProduction() || env.IsStaging() || env.IsEnvironment("UAT"))
+            //{
+            //    app.UseExceptionHandler("/Error");
+            //}
 
-            app.UseFileServer();
+            app.UseStaticFiles();
 
             app.Run(async (context) =>
             {
-                throw new Exception("Something is messed up yo");
-                await context.Response.WriteAsync("Hello World");
+                await context.Response.WriteAsync("Hosting Enviroment: " + env.EnvironmentName);
             });
-
-           
         }
     }
 }

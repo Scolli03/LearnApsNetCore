@@ -16,9 +16,11 @@ namespace LearnAspNetCore.Controllers
         {
             _employeeRespository = employeeRepository;
         }
-        public string Index()
+        public ViewResult Index()
         {
-            return _employeeRespository.GetEmployee(1).Name;
+            var model = _employeeRespository.GetAllEmployee();
+
+            return View(model);
         }
 
         public ViewResult Details()
@@ -32,5 +34,7 @@ namespace LearnAspNetCore.Controllers
             
             return View(homeDetailsViewModel);
         }
+
+
     }
 }

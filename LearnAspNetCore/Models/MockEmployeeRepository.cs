@@ -18,6 +18,12 @@ namespace LearnAspNetCore.Models
                 new Employee(){Id=3,Name="John",Department="LAY",Email="jholly@j-ldimensional.com"},
             };
         }
+
+        public IEnumerable<Employee> GetAllEmployee()
+        {
+            return _employeeList;
+        }
+
         public Employee GetEmployee(int Id)
         {
             return _employeeList.FirstOrDefault(e => e.Id == Id);

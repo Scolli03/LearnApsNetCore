@@ -16,6 +16,10 @@ namespace LearnAspNetCore.Controllers
         {
             _employeeRespository = employeeRepository;
         }
+
+        [Route("")]
+        [Route("Home")]
+        [Route("Home/Index")]
         public ViewResult Index()
         {
             var model = _employeeRespository.GetAllEmployee();
@@ -23,12 +27,12 @@ namespace LearnAspNetCore.Controllers
             return View(model);
         }
 
-        public ViewResult Details()
+        public ViewResult Details(int id)
         {
 
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Employee = _employeeRespository.GetEmployee(1),
+                Employee = _employeeRespository.GetEmployee(id),
                 PageTitle = "Employee Details"
             };
             
